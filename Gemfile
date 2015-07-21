@@ -25,12 +25,14 @@ group :development, :test do
 
   gem 'web-console', '~> 2.0'
   gem 'spring'
+
+  gem 'pry'
 end
 
 group :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails'
-  gem 'cucumber-rails'
-  gem 'database_cleaner', require: false
+  gem 'cucumber-rails', require: false
+  gem 'database_cleaner'
   gem 'selenium-webdriver'
 end

@@ -1,17 +1,17 @@
 FactoryGirl.define do
   factory :ebook do
     user_id 1
-    title "MyString"
-    description "MyText"
-    version "MyString"
-    url "MyText"
+    title "Test Book"
+    description "It's not a real book!"
+    version "1.0"
+    url "http://www.google.com"
     generated false
-    language "MyString"
-    publisher "MyString"
-    subject "MyString"
-    rights "MyString"
-    readability false
-    markdown "MyText"
+    language "en"
+    publisher "Random House"
+    subject "History"
+    rights "None"
+    readability true
+    markdown ""
     epub ""
   end
 end

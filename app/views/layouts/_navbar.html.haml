@@ -1,0 +1,22 @@
+%nav.navbar.navbar-default.navbar-static-top
+  .container
+    .navbar-header
+      %button.navbar-toggle.collapsed{"type" => "button",
+        "data-toggle" => "collapse",
+        "data-target" => "#navbar",
+        "aria-expanded" => "false",
+        "aria-controls" => "navbar"}
+        %span.sr-only
+          Toggle navigation
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+      = link_to "Publishr", "#", class: "navbar-brand"
+    .navbar-collapse.collapse#navbar
+      %ul.nav.navbar-nav.navbar-right
+        %li
+          = link_to (fa_icon("book")+" Library"), "#"
+        %li
+          = link_to (fa_icon("user")+" My Books"), "#"
+        %li
+          = link_to (fa_icon("sign-in")+" Sign In"), "#"

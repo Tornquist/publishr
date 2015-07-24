@@ -21,7 +21,7 @@
             = link_to (fa_icon("leanpub")+" My Books"), "#"
           %li
             = link_to (fa_icon("user")+" My Profile"),
-              edit_user_registration_path
+              user_profile_path(current_user)
           %li
             = link_to (fa_icon("sign-out")+" Sign Out"),
               destroy_user_session_path, method: :delete

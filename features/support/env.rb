@@ -5,6 +5,11 @@
 # files.
 
 require 'cucumber/rails'
+require 'capybara'
+require 'capybara/cucumber'
+require 'factory_girl_rails'
+require 'font-awesome-rails'
+require 'pry'
 
 # Capybara defaults to CSS3 selectors rather than XPath.
 # If you'd prefer to use XPath, just uncomment this line and adjust any
@@ -27,6 +32,10 @@ require 'cucumber/rails'
 # recommended as it will mask a lot of errors for you!
 #
 ActionController::Base.allow_rescue = false
+
+Capybara.default_driver = :selenium
+
+World(FactoryGirl::Syntax::Methods)
 
 # Remove/comment out the lines below if your app doesn't have a database.
 # For some databases (like MongoDB and CouchDB) you may need to use :truncation instead.
@@ -54,5 +63,4 @@ end
 # Possible values are :truncation and :transaction
 # The :transaction strategy is faster, but might give you threading problems.
 # See https://github.com/cucumber/cucumber-rails/blob/master/features/choose_javascript_database_strategy.feature
-Cucumber::Rails::Database.javascript_strategy = :truncation
-
+# Cucumber::Rails::Database.javascript_strategy = :truncation

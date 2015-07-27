@@ -1,3 +1,5 @@
 Rails.application.routes.draw do
-  get '/', to: 'static#index'
+  devise_for :users, :controllers => { registrations: 'registrations' }
+  get '/users/:id', to: 'users#show', as: "user_profile"
+  get '/', to: 'static#index', as: "home"
 end

@@ -18,7 +18,8 @@
           = link_to (fa_icon("book")+" Library"), ebooks_path, id: "library_btn"
         - if user_signed_in?
           %li
-            = link_to (fa_icon("leanpub")+" My Books"), "#", id: "my_books_btn"
+            = link_to (fa_icon("leanpub")+" My Books"), my_ebooks_path,
+              id: "my_books_btn"
           %li
             = link_to (fa_icon("user")+" My Profile"),
               user_profile_path(current_user),

@@ -1,11 +1,12 @@
 class EbooksController < ApplicationController
   before_action :authenticate_user!, :except => [:index, :show]
   before_action :set_ebook, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user_id!, only: [:edit, :update, :destroy]
 
   # GET /ebooks
   # GET /ebooks.json
   def index
-    @ebooks = Ebook.all
+    @ebooks = Ebook.order("lower(title)")
   end
 
   # GET /ebooks/1
@@ -62,6 +63,14 @@ class EbooksController < ApplicationController
     end
   end
 
+  # Access Violation Page
+  def error
+  end
+
+  def my_books
+    @ebooks = current_user.ebooks.order('lower(title)')
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_ebook
@@ -71,5 +80,9 @@ class EbooksController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def ebook_params
       params.require(:ebook).permit(:user_id, :title, :description, :version, :url, :generated, :language, :publisher, :subject, :rights, :readability, :markdown, :epub)
+    end
+
+    def authenticate_user_id!
+      redirect_to ebook_error_path unless @ebook.user_id == current_user.id
     end
 end

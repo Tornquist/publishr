@@ -8,7 +8,8 @@
     - else
       = @ebook.user.full_name
       = surround '(', ')' do
-        = link_to ("@"+ @ebook.user.username), user_profile_path(@ebook.user)
+        = link_to ("@"+ @ebook.user.username), user_profile_path(@ebook.user),
+          id: "author_link"
   - if user_signed_in? && current_user == @ebook.user
     = link_to "Edit", edit_ebook_path(@ebook), class: "btn btn-success"
 

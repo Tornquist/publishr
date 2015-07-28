@@ -2,15 +2,6 @@ Given /^there is a user$/ do
   create(:user)
 end
 
-Given /^the user is on the (.*) page$/ do |goal|
-  case goal
-  when "home"
-    visit home_path
-  when "Edit Account"
-    visit edit_user_registration_path
-  end
-end
-
 Given /^the user is not logged in$/ do
   expect(first('#sign_in_btn')).to_not be_nil
 end
@@ -21,14 +12,6 @@ Given /^the user is logged in$/ do
   fill_in 'user_email', with: u.email
   fill_in 'user_password', with: u.password
   click_button 'Log In'
-end
-
-When /^the user clicks (.*)$/ do |text|
-  find_link(text).click
-end
-
-When /^the user presses (.*)$/ do |text|
-  find_button(text).click
 end
 
 When /^the user fills out the sign up form(.*)$/ do |wrong|
@@ -47,6 +30,12 @@ end
 When /^the user fills in the login form with (.*) and (.*)$/ do |user, password|
   fill_in "user_email", with: user
   fill_in "user_password", with: password
+end
+
+When /^the user fills in the login form$/ do
+  u = build(:user)
+  fill_in "user_email", with: u.email
+  fill_in "user_password", with: u.password
 end
 
 When /^the user goes to their profile page$/ do
@@ -95,15 +84,6 @@ Then /^the user should (.*)see an (.*) link$/ do |state, name|
     expect { find_link(name) }.to raise_error(Capybara::ElementNotFound)
   else
     expect(find_link(name)).to_not eq(nil)
-  end
-end
-
-Then /^the user should be on the (.*) page$/ do |goal|
-  case goal
-  when "Edit Account"
-    expect(page.current_path).to eq(edit_user_registration_path)
-  when "Sign Up"
-    expect(page.current_path).to eq(new_user_registration_path)
   end
 end
 

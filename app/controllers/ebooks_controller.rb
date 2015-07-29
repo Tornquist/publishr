@@ -1,6 +1,6 @@
 class EbooksController < ApplicationController
   before_action :authenticate_user!, :except => [:index, :show]
-  before_action :set_ebook, only: [:show, :edit, :update, :destroy]
+  before_action :set_ebook, only: [:show, :edit, :update, :destroy, :download]
   before_action :authenticate_user_id!, only: [:edit, :update, :destroy]
 
   # GET /ebooks
@@ -30,6 +30,8 @@ class EbooksController < ApplicationController
 
     respond_to do |format|
       if @ebook.save
+        EbookWorker.perform_async(@ebook.id)
+
         format.html { redirect_to @ebook, notice: 'Ebook was successfully created.' }
         format.json { render :show, status: :created, location: @ebook }
       else
@@ -44,6 +46,9 @@ class EbooksController < ApplicationController
   def update
     respond_to do |format|
       if @ebook.update(ebook_params)
+        @ebook.update(generated: false)
+        EbookWorker.perform_async(@ebook.id)
+
         format.html { redirect_to @ebook, notice: 'Ebook was successfully updated.' }
         format.json { render :show, status: :ok, location: @ebook }
       else
@@ -69,6 +74,11 @@ class EbooksController < ApplicationController
 
   def my_books
     @ebooks = current_user.ebooks.order('lower(title)')
+  end
+
+  def download
+    filename = @ebook.title + "_" + @ebook.version + ".epub"
+    send_data @ebook.epub, disposition: "attachment", filename: "#{filename}"
   end
 
   private

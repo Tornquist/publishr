@@ -19,14 +19,15 @@ gem 'haml-rails'
 
 gem 'devise'
 
+gem 'sidekiq'
+gem 'rpub', path: '~/Development/rpub/'
+
 group :development, :test do
   gem 'byebug'
   gem 'pry'
 
   gem 'web-console', '~> 2.0'
   gem 'spring'
-
-  gem 'pry'
 end
 
 group :test do

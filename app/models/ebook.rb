@@ -9,13 +9,13 @@ class Ebook < ActiveRecord::Base
   def dump_config dest
     file = File.open(dest, "w")
     file.puts "---"
-    file.puts "creator: " + user.full_name if user
-    file.puts "language: " + language if language
-    file.puts "title: " + title if language
-    file.puts "publisher: " + publisher if language
-    file.puts "subject: " + subject if subject
-    file.puts "rights: " + rights if rights
-    file.puts "description: " + description if description
+    file.puts "creator: " + user.full_name unless user.blank?
+    file.puts "language: " + language unless language.blank?
+    file.puts "title: " + title unless language.blank?
+    file.puts "publisher: " + publisher unless publisher.blank?
+    file.puts "subject: " + subject unless subject.blank?
+    file.puts "rights: " + rights unless rights.blank?
+    file.puts "description: " + description unless description.blank?
     file.close
   end
 

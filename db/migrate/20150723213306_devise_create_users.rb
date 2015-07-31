@@ -8,7 +8,7 @@ class DeviseCreateUsers < ActiveRecord::Migration
       # Custom Fields
       t.string :first_name, null: false, default: ""
       t.string :last_name, null: false, default: ""
-      t.string :username, null: false, default: "", unique: true
+      t.string :username, null: false, default: ""
       t.string :biography, null: false, default: ""
 
       ## Recoverable

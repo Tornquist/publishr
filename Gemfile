@@ -20,7 +20,7 @@ gem 'haml-rails'
 gem 'devise'
 
 gem 'sidekiq'
-gem 'rpub', path: '~/Development/rpub/'
+gem 'rpub', :git => "git@github.com:Tornquist/rpub.git", :branch => "remote_read_support"
 
 group :development, :test do
   gem 'byebug'

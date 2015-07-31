@@ -1,5 +1,7 @@
-PATH
-  remote: ~/Development/rpub/
+GIT
+  remote: git@github.com:Tornquist/rpub.git
+  revision: 89abced78ff004198e387574b6af01e2220ee42d
+  branch: remote_read_support
   specs:
     rpub (0.5.0)
       builder
